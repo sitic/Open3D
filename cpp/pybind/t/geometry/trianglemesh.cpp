@@ -197,6 +197,7 @@ The attributes of the triangle mesh have different levels::
 
 Example:
     This computes the surface area of the Stanford Bunny::
+
         bunny = o3d.data.BunnyMesh()
         mesh = o3d.t.io.read_triangle_mesh(bunny.path)
         print('The surface area is', mesh.get_surface_area())
