@@ -27,10 +27,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, macos-11]
+        # macos-11 is x64 runner, macos-14 is arm64 runner
+        # https://github.com/actions/runner-images
+        os: [ubuntu-20.04, macos-11, macos-14]
         GLIBCXX_USE_CXX11_ABI: [0, 1]
         exclude:
           - os: macos-11
+            GLIBCXX_USE_CXX11_ABI: 0
+          - os: macos-14
             GLIBCXX_USE_CXX11_ABI: 0
     env:
       GLIBCXX_USE_CXX11_ABI: ${{ matrix.GLIBCXX_USE_CXX11_ABI }}
@@ -42,7 +46,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: '3.10'
 
       - name: Install dependencies
         if: ${{ matrix.os == 'ubuntu-18.04' }}
@@ -63,7 +67,7 @@ jobs:
       - name: Upload WebRTC
         uses: actions/upload-artifact@v4
         with:
-          name: webrtc_release_${{ matrix.os }}
+          name: webrtc_release_${{ matrix.os }}_${{ runner.arch}}
           path: |
                  webrtc_*.tar.gz
                  checksum_*.txt
