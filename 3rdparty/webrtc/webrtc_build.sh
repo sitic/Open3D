@@ -18,7 +18,7 @@ set -euox pipefail
 # Procedure:
 #
 # 1) Download depot_tools, webrtc to following directories:
-#    ├── Oepn3D
+#    ├── Open3D
 #    ├── depot_tools
 #    └── webrtc
 #        ├── .gclient
@@ -109,8 +109,14 @@ build_webrtc() {
     OPEN3D_DIR="$PWD"
     echo Apply patches
     cp 3rdparty/webrtc/{CMakeLists.txt,webrtc_common.cmake} ../webrtc
+    echo "cat ../webrtc/src/BUILD.gn"
+    cat ../webrtc/src/BUILD.gn
+    # echo "cat ../webrtc/src/config/BUILDCONFIG.gn"
+    # cat ../webrtc/src/config/BUILDCONFIG.gn
     git -C ../webrtc/src apply \
         "$OPEN3D_DIR"/3rdparty/webrtc/0001-src-enable-rtc_use_cxx11_abi-option.patch
+    echo "find ../webrtc -iname BUILDCONFIG.gn"
+    find ../webrtc -iname "BUILDCONFIG.gn"
     git -C ../webrtc/src/build apply \
         "$OPEN3D_DIR"/3rdparty/webrtc/0001-build-enable-rtc_use_cxx11_abi-option.patch
     git -C ../webrtc/src/third_party apply \

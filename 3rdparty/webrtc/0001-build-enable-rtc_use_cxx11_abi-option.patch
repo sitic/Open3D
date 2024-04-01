@@ -4,13 +4,13 @@ Date: Wed, 7 Apr 2021 16:17:39 -0700
 Subject: [PATCH] build: enable rtc_use_cxx11_abi option
 
 ---
- config/BUILDCONFIG.gn | 6 ++++++
+ build/config/BUILDCONFIG.gn | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/config/BUILDCONFIG.gn b/config/BUILDCONFIG.gn
+diff --git a/build/config/BUILDCONFIG.gn b/build/config/BUILDCONFIG.gn
 index 0ef73ab2b..5ab677e27 100644
---- a/config/BUILDCONFIG.gn
-+++ b/config/BUILDCONFIG.gn
+--- a/build/config/BUILDCONFIG.gn
++++ b/build/config/BUILDCONFIG.gn
 @@ -163,6 +163,12 @@ declare_args() {
    is_component_build = is_debug && current_os != "ios"
  }
